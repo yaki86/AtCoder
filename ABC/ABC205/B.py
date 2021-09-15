@@ -1,23 +1,16 @@
 import sys
 from io import StringIO
 import unittest
-from math import floor, log2
-
-
-# def resolve() :
-#     N = int(input())
-#     ans = floor(log2(N))
-#     print(ans)
 
 def resolve():
     N = int(input())
-    k = 0
-    while(True):
-        if 2**k > N:
-            print(k-1)
+    A = list(map(int,input().split()))
+    for i in range(N):
+        if A.count(i+1) != 1:
+            print('No')
             break
-        k += 1
-
+    else:
+        print('Yes')
 
 class TestClass(unittest.TestCase):
     def assertIO(self, input, output):
@@ -30,18 +23,27 @@ class TestClass(unittest.TestCase):
         self.assertEqual(out, output)
 
     def test_入力例_1(self):
-        input = """6"""
-        output = """2"""
+        input = """5
+3 1 2 4 5"""
+        output = """Yes"""
         self.assertIO(input, output)
 
     def test_入力例_2(self):
-        input = """1"""
-        output = """0"""
+        input = """6
+3 1 4 1 5 2"""
+        output = """No"""
         self.assertIO(input, output)
 
     def test_入力例_3(self):
-        input = """1000000000000000000"""
-        output = """59"""
+        input = """3
+1 2 3"""
+        output = """Yes"""
+        self.assertIO(input, output)
+
+    def test_入力例_4(self):
+        input = """1
+1"""
+        output = """Yes"""
         self.assertIO(input, output)
 
 

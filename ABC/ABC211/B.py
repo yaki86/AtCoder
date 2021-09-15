@@ -1,23 +1,15 @@
 import sys
 from io import StringIO
 import unittest
-from math import floor, log2
-
-
-# def resolve() :
-#     N = int(input())
-#     ans = floor(log2(N))
-#     print(ans)
 
 def resolve():
-    N = int(input())
-    k = 0
-    while(True):
-        if 2**k > N:
-            print(k-1)
-            break
-        k += 1
-
+    S = []
+    for i in range(4):
+        S.append(input())
+    result = 'Yes'
+    if (S.count('2B') != 1) or (S.count('3B') != 1) or (S.count('HR') != 1) or (S.count('H') != 1):
+        result = 'No'
+    print(result)
 
 class TestClass(unittest.TestCase):
     def assertIO(self, input, output):
@@ -30,18 +22,19 @@ class TestClass(unittest.TestCase):
         self.assertEqual(out, output)
 
     def test_入力例_1(self):
-        input = """6"""
-        output = """2"""
+        input = """3B
+HR
+2B
+H"""
+        output = """Yes"""
         self.assertIO(input, output)
 
     def test_入力例_2(self):
-        input = """1"""
-        output = """0"""
-        self.assertIO(input, output)
-
-    def test_入力例_3(self):
-        input = """1000000000000000000"""
-        output = """59"""
+        input = """2B
+3B
+HR
+3B"""
+        output = """No"""
         self.assertIO(input, output)
 
 

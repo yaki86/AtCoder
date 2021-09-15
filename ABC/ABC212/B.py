@@ -1,23 +1,25 @@
 import sys
 from io import StringIO
 import unittest
-from math import floor, log2
-
-
-# def resolve() :
-#     N = int(input())
-#     ans = floor(log2(N))
-#     print(ans)
 
 def resolve():
-    N = int(input())
-    k = 0
-    while(True):
-        if 2**k > N:
-            print(k-1)
-            break
-        k += 1
+    tmp = input()
+    X = []
+    result = 'Strong'
+    for i in range(4):
+        X.append(int(tmp[i]))
 
+    if X.count(X[0]) == 4:
+        result = 'Weak'
+    else:
+        for i in range(3):
+            if X[i] == 9 and X[i+1] != 0:
+                break
+            if X[i] != 9 and X[i+1] != X[i] + 1:
+                break
+            if i == 2:
+                result = 'Weak'
+    print(result)
 
 class TestClass(unittest.TestCase):
     def assertIO(self, input, output):
@@ -30,18 +32,18 @@ class TestClass(unittest.TestCase):
         self.assertEqual(out, output)
 
     def test_入力例_1(self):
-        input = """6"""
-        output = """2"""
+        input = """7777"""
+        output = """Weak"""
         self.assertIO(input, output)
 
     def test_入力例_2(self):
-        input = """1"""
-        output = """0"""
+        input = """0112"""
+        output = """Strong"""
         self.assertIO(input, output)
 
     def test_入力例_3(self):
-        input = """1000000000000000000"""
-        output = """59"""
+        input = """9012"""
+        output = """Weak"""
         self.assertIO(input, output)
 
 

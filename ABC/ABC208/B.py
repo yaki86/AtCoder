@@ -1,23 +1,22 @@
 import sys
 from io import StringIO
 import unittest
-from math import floor, log2
-
-
-# def resolve() :
-#     N = int(input())
-#     ans = floor(log2(N))
-#     print(ans)
+from math import factorial
 
 def resolve():
-    N = int(input())
-    k = 0
-    while(True):
-        if 2**k > N:
-            print(k-1)
+    coin = []
+    for i in range(10):
+        coin.append(factorial(i+1))
+    P = int(input())
+    total = 0
+    for j in range(9,-1,-1):
+        if P == 0:
             break
-        k += 1
-
+        if coin[j] <= P:
+            coin_count = min(P // coin[j],100)
+            P -= coin_count * coin[j]
+            total += coin_count
+    print(total)
 
 class TestClass(unittest.TestCase):
     def assertIO(self, input, output):
@@ -30,18 +29,18 @@ class TestClass(unittest.TestCase):
         self.assertEqual(out, output)
 
     def test_入力例_1(self):
-        input = """6"""
-        output = """2"""
+        input = """9"""
+        output = """3"""
         self.assertIO(input, output)
 
     def test_入力例_2(self):
-        input = """1"""
-        output = """0"""
+        input = """119"""
+        output = """10"""
         self.assertIO(input, output)
 
     def test_入力例_3(self):
-        input = """1000000000000000000"""
-        output = """59"""
+        input = """10000000"""
+        output = """24"""
         self.assertIO(input, output)
 
 
